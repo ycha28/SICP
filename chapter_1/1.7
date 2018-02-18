@@ -1,0 +1,8 @@
+(square (sqrt 999999999999999999999999)) results in 1e24.
+(square (sqrt 0.000000000001)) results in 9.765625006660159e-4.
+
+For very small numbers, it is easy for the difference between the guess and the number to be less than 0.001. For large numbers, the limited precision of arithmetic operations makes it difficult to represent small differences between large numbers, so the best guess will not be within 0.001 of the actual number, which means the algorithm stops improving the guess at some point.
+
+(define (good-enough? guess x)
+  (< (/ (abs (- (square guess) x)) guess)
+     (* guess 0.0001))) 
