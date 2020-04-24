@@ -1,0 +1,55 @@
+#lang sicp
+(define (sum term a next b)
+  (if (> a b)
+    0
+    (+ (term a)
+       (sum term (next a) next b))))
+
+(define (cube a)
+  (* a a a))
+
+(define (inc a)
+  (+ a 1))
+
+(define (dec a)
+  (- a 1))
+
+(define (sum-cubes a b)
+  (sum cube a inc b))
+
+(define (sum-iter term a next b)
+  (define (iter a result)
+    (if (> a b)
+        result
+        (iter (next a) (+ (term a) result))))
+  (iter a 0))
+
+(define (sum-cubes-iter a b)
+   (sum-iter cube a inc b))
+
+(define (identity a) a)
+
+a.
+(define (product term a next b)
+  (if (> a b)
+    1
+    (* (term a)
+       (product term (next a) next b))))
+
+(define (factorial n)
+  (product identity 1 inc n))
+  
+(define (term-wallis n)
+  (* (/ (* 2 n) (- (* 2 n) 1))
+     (/ (* 2 n) (+ (* 2 n) 1))))
+
+(define (wallis-pi start end)
+  (product term-wallis start inc end))
+  
+b.
+(define (product-iter term a next b)
+  (define (iter a result)
+    (if (> a b)
+        result
+        (iter (next a) (* result (term a)))))
+  (iter a 1))
