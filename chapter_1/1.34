@@ -1,0 +1,2 @@
+Calling (f f) would assign the value 2 to f, which would ultimately result in calling (2 2). This returns an error,
+since 2 is not a function, and the first argument after a ( always expects a function to be applied.
