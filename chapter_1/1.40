@@ -5,4 +5,5 @@
        (* x b)
        c)))
 
-(newtons-method (cubic 6 3 2) 1) = 5.5223
+(newtons-method (cubic 6 3 2) 1)
+> 5.5223
