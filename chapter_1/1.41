@@ -3,4 +3,7 @@
     (f (f x))))
 
 ((double inc) 1)
-(((double (double double)) inc) 5) = 21
+> 3
+
+(((double (double double)) inc) 5)
+> 21
