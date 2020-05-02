@@ -1,0 +1,8 @@
+(define (repeated f n)
+  (lambda (x)
+    (if (= n 0)
+        x
+        ((repeated f (dec n)) (f x)))))
+
+((repeated square 2) 5)
+> 625
