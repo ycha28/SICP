@@ -1,0 +1,46 @@
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
+
+(define (make-rat n d)
+  (define (make-simplified-rat num den)
+    (let ((g (gcd (abs num) (abs den))))
+      (cons (/ num g) (/ den g))))
+  (cond ((and (< n 0) (< d 0)) (make-simplified-rat (abs n) (abs d)))
+        ((and (>= n 0) (< d 0)) (make-simplified-rat (- 0 n) (abs d)))
+        (else (make-simplified-rat n d))))
+
+(define (numer x) (car x))
+
+(define (denom x) (cdr x))
+
+(define (print-rat x)
+  (newline)
+  (display (numer x))
+  (display "/")
+  (display (denom x)))
+
+(define (add-rat x y)
+  (make-rat (+ (* (numer x) (denom y))
+               (* (numer y) (denom x)))
+            (* (denom x) (denom y))))
+(define (sub-rat x y)
+  (make-rat (- (* (numer x) (denom y))
+               (* (numer y) (denom x)))
+            (* (denom x) (denom y))))
+(define (mul-rat x y)
+  (make-rat (* (numer x) (numer y))
+            (* (denom x) (denom y))))
+(define (div-rat x y)
+  (make-rat (* (numer x) (denom y))
+            (* (denom x) (numer y))))
+(define (equal-rat? x y)
+  (= (* (numer x) (denom y))
+     (* (numer y) (denom x))))
+
+(define one-half (make-rat 1 2))
+(define one-third (make-rat 1 3))
+
+(print-rat (sub-rat one-third one-half))
+> -1/6
