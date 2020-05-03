@@ -1,0 +1,23 @@
+(define (iterative-improve good-enough? improve)
+  (lambda (x)
+    (define (iterate guess)
+      (if (good-enough? guess)
+          guess
+          (iterate (improve guess))))
+    (iterate x)))
+
+(define (sqrt-2 x)
+  ((iterative-improve (lambda (guess) (< (abs (- (square guess) x)) tolerance))
+                      (lambda (guess) (average guess (/ x guess))))
+   1.0))
+
+(sqrt-2 64)
+> 8.00000000000017
+
+(define (fixed-point-2 f first-guess)
+  ((iterative-improve (lambda (guess) (< (abs (- guess (f guess))) tolerance))
+                      (lambda (guess) (f guess)))
+   first-guess))
+
+(fixed-point-2 cos 1.0)
+> 0.7390893414033928
