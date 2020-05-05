@@ -1,0 +1,22 @@
+#lang sicp
+(define (cons a b)
+  (define (power x n)
+    (if (= n 1)
+        x
+        (* x (power x (dec n)))))
+  (* (power 2 a)
+     (power 3 b)))
+
+(define (car x)
+  (define (calculate-a a n)
+    (if (= 0 (remainder n 2))
+        (calculate-a (inc a) (/ n 2))
+        a))
+  (calculate-a 0 x))
+
+(define (cdr x)
+  (define (calculate-b b n)
+    (if (= 0 (remainder n 3))
+        (calculate-b (inc b) (/ n 3))
+        b))
+  (calculate-b 0 x))
